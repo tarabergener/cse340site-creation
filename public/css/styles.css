@@ -129,7 +129,7 @@ h1 {
 
 .delorean h3 {
   color: rgb(33, 186, 206);
-  padding: 1px;
+  padding-left: 20px;
   margin-bottom: 5px;
   font-size: 25px;
   font-family: 'Merriweather', sans-serif;
@@ -147,6 +147,7 @@ button {
   border: none;
   margin-top: 25px;
   border-radius: 3px;
+  margin-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 35px;
@@ -163,12 +164,12 @@ section .upgrades {
   grid-template-columns: 1fr 1fr;
 }
 
-.upgrades li {
+.upgrades div a {
   list-style-type: none;
   justify-self: center;
 }
 
-.upgrades li a {
+.upgrades a {
   color: blue;
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
