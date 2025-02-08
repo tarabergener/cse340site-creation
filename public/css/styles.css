@@ -253,6 +253,7 @@ picture img {
   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
+  margin: 5%;
 }
 
 #inv-display li {
@@ -270,6 +271,11 @@ picture img {
 .namePrice h2 a {
   font-family: 'Roboto', sans-serif;
   text-decoration: none;
+  color: black;
+}
+
+.namePrice h2 a:hover {
+  color: rgb(66, 66, 66);
 }
 
 #inv-display li img {

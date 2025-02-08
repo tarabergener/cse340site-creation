@@ -8,6 +8,6 @@ const utilities = require("../utilities/index")
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
 // Route to build inventory by single view
-router.get("/detail/:inventoryId", invController.buildByInventoryId);
+router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByInventoryId));
 
 module.exports = router;
