@@ -62,31 +62,8 @@ Util.buildClassificationGrid = async function(data){
 * ************************************ */
 Util.buildSingleView = async function(data){
   let view
-  if(data.length > 0){
-    view = '<ul id="inv-display">'
-    data.forEach(vehicle => { 
-      view += '<li>'
-      view +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
-      view += '<div class="namePrice">'
-      view += '<hr />'
-      view += '<h2>'
-      view += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-      view += '</h2>'
-      view += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      view += '</div>'
-      view += '</li>'
-    })
-    view += '</ul>'
-  } else { 
-    view += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-  }
+  view = '<ul id="inv-display">'
+
   return view
 }
 
