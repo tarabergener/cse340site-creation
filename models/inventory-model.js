@@ -32,8 +32,7 @@ async function getSingleByInventoryId(inv_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory
-      WHERE inv_id = $1
-      ORDER BY inv_id`,
+      WHERE inv_id = $1`,
       [inv_id]
     )
     return data.rows[0]
@@ -41,7 +40,5 @@ async function getSingleByInventoryId(inv_id) {
     console.error("getvehiclesbyid error " + error)
   }
 }
-
-//getSingleByInventoryId(5)
 
 module.exports = {getClassifications, getInventoryByClassificationId, getSingleByInventoryId};

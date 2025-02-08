@@ -1,3 +1,4 @@
+const { buildByClassificationId } = require("../controllers/invController")
 const invModel = require("../models/inventory-model")
 const Util = {}
 
@@ -61,8 +62,16 @@ Util.buildClassificationGrid = async function(data){
 * Build the single view HTML
 * ************************************ */
 Util.buildSingleView = async function(data){
-  let view
-  view = '<ul id="inv-display">'
+  let view = '';
+      view += '<div class="car-container">';
+      view += '<img src="' + data.inv_image + '"alt="Image of ' + data.inv_make + ' ' + data.inv_model + '"/>';
+      view += '<ul class="car-details">';
+      view += '<li><h2 class="price">Price: $' + Intl.NumberFormat('en-US').format(data.inv_price) + '</h2></li>';
+      view += '<li class="description"><b>Description</b>: ' + data.inv_description + '</li>';
+      view += '<li class="color"><b>Color</b>: ' + data.inv_color + '</li>';
+      view += '<li class="miles"><b>Milage</b>: ' + Intl.NumberFormat('en-US').format(data.inv_miles) + '</li>';
+      view += '</ul>';
+      view += '</div>';
 
   return view
 }
