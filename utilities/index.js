@@ -76,6 +76,67 @@ Util.buildSingleView = async function(data){
   return view
 }
 
+/* **************************************
+* Build the Login Page view
+* ************************************ */
+Util.buildLogin = async function(req, res, next){
+  let logView = '';
+    logView += '<form class="login-form">';
+    logView += '<fieldset>'
+    logView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
+    logView += '<input type="email" id="account_email" name="account_email"><br>';
+    logView += '<label for="account_password"><strong>Password:</strong></label><br>';
+    logView += '<input type="password" id="account_password" minlength="12" name="account_password"><br>';
+    logView += '<p>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</p>';
+    logView += '<input type="button" value="Show Password"><br>';
+    logView += '<input type="submit" value="Login">';
+    logView += '<p>No account? <a href="../../account/register">Sign-up</a></p>'
+    logView += '</fieldset>'
+    logView += '</form>';
+
+  return logView
+}
+
+/* **************************************
+* Build the Registration Page view
+* ************************************ */
+Util.buildRegister = async function(req, res, next){
+  //const pswdbtn = 
+  //document.querySelector("#pswdbtn");
+  //pswdbtn.addEventListener("click",function() {
+  //  const pswdInput = document.getElementById("account_password");
+  //  const type = pswdInput.getAttribute("type");
+  //  if (type == "password") {
+  //    pswdInput.setAttribute("type", "text");
+  //    pswdbtn.innerHTML = "Hide Password";
+  //  } else {
+  //    pswdInput.setAttribute("type", "password");
+  //    pswdbtn.innerHTML = "Show Password";
+  //  }
+  //});
+  let regView = '';
+    regView += '<div>';
+    regView += '<p>ALL FIELDS ARE REQUIRED.</p>';
+    regView += '<form class="register-form" action="/account/register" method="post">';
+    regView += '<fieldset>';
+    regView += '<label for="account_firstname"><strong>First Name:</strong></label><br>';
+    regView += '<input type="text" id="account_firstname" name="account_firstname" required><br>';
+    regView += '<label for="account_lastname"><strong>Last Name:</strong></label><br>';
+    regView += '<input type="text" id="account_lastname" name="account_lastname" required><br>';
+    regView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
+    regView += '<input type="email" id="account_email" name="account_email" placeholder="Enter a valide email address" required><br>';
+    regView += '<label for="account_password"><strong>Password:</strong></label><br>';
+    regView += '<input type="password" id="account_password" name="account_password" required><br>';
+    regView += '<p>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</p>';
+    regView += '<span id="pswdbtn">Show Password</span><br>';
+    regView += '<input type="submit" value="Register">';
+    regView += '</fieldset>';
+    regView += '</form>';
+    regView += '</div>';
+
+  return regView
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
