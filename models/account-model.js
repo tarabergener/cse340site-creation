@@ -15,4 +15,44 @@ async function registerAccount(account_firstname, account_lastname, account_emai
   }
 }
 
-module.exports = { registerAccount }
+/* **********************
+ *   Check for existing email
+ * ********************* */
+async function checkExistingEmail(account_email){
+  try {
+    const sql = "SELECT * FROM account WHERE account_email = $1"
+    const email = await pool.query(sql, [account_email])
+    return email.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Check for correct password to email
+ * ********************* */
+async function incorrectPassword(account_email, account_password){
+  try {
+    const sql = "SELECT * FROM account WHERE (account_email, account_password) = ($1, $2)"
+    const email = await pool.query(sql, [account_email])
+    const password = await pool.query(sql, [account_password])
+    return email.rowCount, password.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Check for existing classification
+ * ********************* */
+async function checkExistingClass(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const className = await pool.query(sql, [classification_name])
+    return className.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, incorrectPassword, checkExistingClass }

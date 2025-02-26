@@ -35,4 +35,68 @@ invController.buildByInventoryId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Deliver management view
+ * ************************** */
+invController.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let manageView = await utilities.buildManagementView()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    manageView,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Deliver add new classification view
+ * ************************** */
+invController.buildAddNewClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  //let newClassView = await utilities.newClassView()
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  })
+}
+
+/* ****************************************
+*  Process New Classification
+* *************************************** */
+invController.addNewClass = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let manageView = await utilities.buildManagementView()
+  const classification_name = req.body
+
+  const newClassResult = await accountModel.registerAccount(
+    classification_name,
+  )
+
+  if (newClassResult) {
+    req.flash(
+      "notice",
+      `New classification successfully added.`
+    )
+    res.status(201).render("inv/", {
+      title: "Vehicle Management",
+      nav,
+      manageView,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", `Sorry, add classification process failed. Try again.`)
+    res.status(501).render("inv/add-classification", {
+      title: "Add New Classification",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+/* ***************************
+ *  Build add new inventory view
+ * ************************** */
+
 module.exports = invController

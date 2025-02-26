@@ -1,0 +1,17 @@
+<%# A consistant header among pages%>
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<div>
+    <p>ALL FIELDS ARE REQUIRED.</p>
+    <form class="new-class-form" action="/classification/" method="post">
+      <fieldset>
+        <label for="classification_name"><strong>Classification Name:</strong></label><br>
+        <input type="text" id="classification_name" name="classification_name" required value="<%= locals.classification_name %>"><br>
+        <input type="submit" value="Add Classification">
+      </fieldset>
+    </form>
+  </div>

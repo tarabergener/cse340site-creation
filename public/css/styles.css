@@ -107,8 +107,21 @@ main {
 }
 
 input {
-  margin-bottom: 5px;
-  size
+  margin-left: 5px;
+}
+
+input:required:invalid, input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-size: 10px;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+input:required:valid {
+  background-image: url(/images/valid.png);
+  background-size: 10px;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 /* Delorean content */

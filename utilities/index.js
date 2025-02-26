@@ -76,31 +76,40 @@ Util.buildSingleView = async function(data){
   return view
 }
 
+Util.buildManagementView = async function (req, res, next) {
+  let manageView = '';
+    manageView += '<ul>';
+    manageView += '<li><a href="../../inv/add-classification" title="Add New Classification">Add New Classification</a></li>';
+    manageView += '<li><a href="/" title="Add New Vehicle">Add New Vehicle</a></li>'
+
+  return manageView
+}
+
 /* **************************************
 * Build the Login Page view
 * ************************************ */
-Util.buildLogin = async function(req, res, next){
-  let logView = '';
-    logView += '<form class="login-form">';
-    logView += '<fieldset>'
-    logView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
-    logView += '<input type="email" id="account_email" name="account_email"><br>';
-    logView += '<label for="account_password"><strong>Password:</strong></label><br>';
-    logView += '<input type="password" id="account_password" minlength="12" name="account_password"><br>';
-    logView += '<p>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</p>';
-    logView += '<input type="button" value="Show Password"><br>';
-    logView += '<input type="submit" value="Login">';
-    logView += '<p>No account? <a href="../../account/register">Sign-up</a></p>'
-    logView += '</fieldset>'
-    logView += '</form>';
-
-  return logView
-}
+//Util.buildLogin = async function(req, res, next){
+//  let logView = '';
+//    logView += '<form class="login-form" action="/account/login" method="post">';
+//    logView += '<fieldset>'
+//    logView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
+//    logView += '<input type="email" id="account_email" name="account_email" required><br>';
+//    logView += '<label for="account_password"><strong>Password:</strong></label><br>';
+//    logView += '<input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>';
+//    logView += '<span>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</span>';
+//    logView += '<input type="button" value="Show Password"><br>';
+//    logView += '<input type="submit" value="Login">';
+//    logView += '<p>No account? <a href="../../account/register">Sign-up</a></p>'
+//    logView += '</fieldset>'
+//    logView += '</form>';
+//
+//  return logView
+//}
 
 /* **************************************
 * Build the Registration Page view
 * ************************************ */
-Util.buildRegister = async function(req, res, next){
+//Util.buildRegister = async function(req, res, next){
   //const pswdbtn = 
   //document.querySelector("#pswdbtn");
   //pswdbtn.addEventListener("click",function() {
@@ -114,28 +123,28 @@ Util.buildRegister = async function(req, res, next){
   //    pswdbtn.innerHTML = "Show Password";
   //  }
   //});
-  let regView = '';
-    regView += '<div>';
-    regView += '<p>ALL FIELDS ARE REQUIRED.</p>';
-    regView += '<form class="register-form" action="/account/register" method="post">';
-    regView += '<fieldset>';
-    regView += '<label for="account_firstname"><strong>First Name:</strong></label><br>';
-    regView += '<input type="text" id="account_firstname" name="account_firstname" required><br>';
-    regView += '<label for="account_lastname"><strong>Last Name:</strong></label><br>';
-    regView += '<input type="text" id="account_lastname" name="account_lastname" required><br>';
-    regView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
-    regView += '<input type="email" id="account_email" name="account_email" placeholder="Enter a valide email address" required><br>';
-    regView += '<label for="account_password"><strong>Password:</strong></label><br>';
-    regView += '<input type="password" id="account_password" name="account_password" required><br>';
-    regView += '<p>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</p>';
-    regView += '<span id="pswdbtn">Show Password</span><br>';
-    regView += '<input type="submit" value="Register">';
-    regView += '</fieldset>';
-    regView += '</form>';
-    regView += '</div>';
-
-  return regView
-}
+  //let regView = '';
+  //  regView += '<div>';
+  //  regView += '<p>ALL FIELDS ARE REQUIRED.</p>';
+  //  regView += '<form class="register-form" action="/account/register" method="post">';
+  //  regView += '<fieldset>';
+  //  regView += '<label for="account_firstname"><strong>First Name:</strong></label><br>';
+  //  regView += '<input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname %>"><br>';
+  //  regView += '<label for="account_lastname"><strong>Last Name:</strong></label><br>';
+  //  regView += '<input type="text" id="account_lastname" name="account_lastname" required value="<%= locals.account_lastname %>"><br>';
+  //  regView += '<label for="account_email"><strong>Email Address:</strong></label><br>';
+  //  regView += '<input type="email" id="account_email" name="account_email" required value="<%= locals.account_email %>" placeholder="Enter a valide email address"><br>';
+  //  regView += '<label for="account_password"><strong>Password:</strong></label><br>';
+  //  regView += '<input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>';
+  //  regView += '<span>Passwords must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.</span><br>';
+  //  regView += '<span id="pswdbtn">Show Password</span><br>';
+  //  regView += '<input type="submit" value="Register">';
+  //  regView += '</fieldset>';
+  //  regView += '</form>';
+  //  regView += '</div>';
+//
+  //return regView
+//}
 
 /* ****************************************
  * Middleware For Handling Errors
