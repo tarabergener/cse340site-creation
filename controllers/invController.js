@@ -68,9 +68,9 @@ invController.buildAddNewClassification = async function (req, res, next) {
 invController.addNewClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   let manageView = await utilities.buildManagementView()
-  const classification_name = req.body
+  const { classification_name } = req.body
 
-  const newClassResult = await accountModel.registerAccount(
+  const newClassResult = await invModel.addNewClass(
     classification_name,
   )
 
@@ -79,7 +79,7 @@ invController.addNewClass = async function (req, res, next) {
       "notice",
       `New classification successfully added.`
     )
-    res.status(201).render("inv/", {
+    res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
       manageView,
@@ -87,7 +87,7 @@ invController.addNewClass = async function (req, res, next) {
     })
   } else {
     req.flash("notice", `Sorry, add classification process failed. Try again.`)
-    res.status(501).render("inv/add-classification", {
+    res.status(501).render("inventory/add-classification", {
       title: "Add New Classification",
       nav,
       errors: null,

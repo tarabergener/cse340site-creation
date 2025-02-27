@@ -1,6 +1,8 @@
 const { buildByClassificationId } = require("../controllers/invController")
 const invModel = require("../models/inventory-model")
 const Util = {}
+const { body, validationResult } = require("express-validator")
+const validate = {}
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -76,6 +78,9 @@ Util.buildSingleView = async function(data){
   return view
 }
 
+/* **************************************
+* Build the Vehicle Management view
+* ************************************ */
 Util.buildManagementView = async function (req, res, next) {
   let manageView = '';
     manageView += '<ul>';

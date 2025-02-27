@@ -5,9 +5,21 @@
       res.redirect('/')
     } %>
 
+<%# A message block available for messages we want to add to the page later%>
+<%- messages() %>
+
+<%# Code block to display errors %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <div>
     <p>ALL FIELDS ARE REQUIRED.</p>
-    <form class="new-class-form" action="/classification/" method="post">
+    <form class="new-class-form" action="/inv/add-classification/" method="post">
       <fieldset>
         <label for="classification_name"><strong>Classification Name:</strong></label><br>
         <input type="text" id="classification_name" name="classification_name" required value="<%= locals.classification_name %>"><br>

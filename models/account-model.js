@@ -42,17 +42,4 @@ async function incorrectPassword(account_email, account_password){
   }
 }
 
-/* **********************
- *   Check for existing classification
- * ********************* */
-async function checkExistingClass(classification_name){
-  try {
-    const sql = "SELECT * FROM classification WHERE classification_name = $1"
-    const className = await pool.query(sql, [classification_name])
-    return className.rowCount
-  } catch (error) {
-    return error.message
-  }
-}
-
-module.exports = { registerAccount, checkExistingEmail, incorrectPassword, checkExistingClass }
+module.exports = { registerAccount, checkExistingEmail, incorrectPassword }

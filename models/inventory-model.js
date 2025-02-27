@@ -46,7 +46,7 @@ async function getSingleByInventoryId(inv_id) {
 * *************************** */
 async function addNewClass(classification_name){
   try {
-    const sql = "INSERT INTO classificiation (classification_name) VALUES ($1) RETURNING *"
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
     console.log("SQL", sql);
     console.log("Values:", classification_name)    
     return await pool.query(sql, [classification_name]);
@@ -56,4 +56,23 @@ async function addNewClass(classification_name){
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getSingleByInventoryId, addNewClass };
+/* **********************
+ *   Check for existing classification
+ * ********************* */
+async function checkExistingClass(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const className = await pool.query(sql, [classification_name])
+    return className.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getSingleByInventoryId, 
+  addNewClass, 
+  checkExistingClass, 
+};

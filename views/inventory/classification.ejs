@@ -6,7 +6,16 @@
 } %>
 
 <%# A message block available for messages we want to add to the page later%>
-<%# messages() %>
+<%- messages() %>
+
+<%# Code block to display errors %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <%# The code to display the grid %>
 <%# This code is very simple the view is meant to display content, not necessarily to contain logic %>
