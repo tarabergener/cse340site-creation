@@ -109,6 +109,39 @@ invController.buildAddNewVehicle = async function (req, res, next) {
   })
 }
 
+/* ****************************************
+*  Process New Classification
+* *************************************** */
+invController.addNewVehicle = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let manageView = await utilities.buildManagementView()
+  let classList = await utilities.buildClassificationList()
+  const { classification_name } = req.body
 
+  const newClassResult = await invModel.addNewClass(
+    classification_name,
+  )
+
+  if (newClassResult) {
+    req.flash(
+      "notice",
+      `New vehicle successfully added.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      manageView,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", `Sorry, add vehicle process failed. Try again.`)
+    res.status(501).render("inventory/add-vehicle", {
+      title: "Add New Vehicle",
+      nav,
+      classList,
+      errors: null,
+    })
+  }
+}
 
 module.exports = invController

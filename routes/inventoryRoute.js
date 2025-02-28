@@ -28,4 +28,12 @@ router.post(
     utilities.handleErrors(invController.addNewClass)
 );
 
+// Process the new vehicle data
+router.post(
+    "/add-vehicle",
+    validate.addVehicleRules(),
+    validate.checkVehicleData,
+    utilities.handleErrors(invController.addNewVehicle)
+);
+
 module.exports = router;
