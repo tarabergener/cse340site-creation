@@ -96,7 +96,19 @@ invController.addNewClass = async function (req, res, next) {
 }
 
 /* ***************************
- *  Build add new inventory view
+ *  Deliver Add New Vehicle view
  * ************************** */
+invController.buildAddNewVehicle = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classList = await utilities.buildClassificationList()
+  res.render("./inventory/add-vehicle", {
+    title: "Add New Vehicle",
+    nav,
+    classList,
+    errors: null,
+  })
+}
+
+
 
 module.exports = invController

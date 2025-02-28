@@ -18,7 +18,7 @@ router.get("/", utilities.handleErrors(invController.buildManagementView));
 router.get("/add-classification", utilities.handleErrors(invController.buildAddNewClassification))
 
 // Route to build Add New Vehicle view
-router.get("/add-vehicle", utilities.handleErrors(invController.addNewVehicle));
+router.get("/add-vehicle", utilities.handleErrors(invController.buildAddNewVehicle));
 
 // Process the new classification data
 router.post(
