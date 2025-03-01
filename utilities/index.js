@@ -83,7 +83,7 @@ Util.buildSingleView = async function(data){
 * ************************************ */
 Util.buildManagementView = async function (req, res, next) {
   let manageView = '';
-    manageView += '<ul>';
+    manageView += '<ul class="manage-view">';
     manageView += '<li><a href="../../inv/add-classification" title="Add New Classification">Add New Classification</a></li>';
     manageView += '<li><a href="../../inv/add-vehicle" title="Add New Vehicle">Add New Vehicle</a></li>'
 

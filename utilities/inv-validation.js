@@ -55,8 +55,7 @@ validate.addVehicleRules = () => {
     .escape()
     .notEmpty()
     .isLength({ min: 1 })
-    .withMessage("A valid vehicle make is required.")
-    .customSanitizer(value => value.toUpperCase()),
+    .withMessage("A valid vehicle make is required."),
 
     // valid vehicle model is required
     body("inv_model")
@@ -64,8 +63,7 @@ validate.addVehicleRules = () => {
     .escape()
     .notEmpty()
     .isLength({ min: 1 })
-    .withMessage("A valid vehicle model is required.")
-    .customSanitizer(value => value.toUpperCase()),
+    .withMessage("A valid vehicle model is required."),
 
     // valid vehicle description is required
     body("inv_description")
@@ -120,8 +118,7 @@ validate.addVehicleRules = () => {
     .escape()
     .notEmpty()
     .isLength({ min: 1 })
-    .withMessage("A valid vehicle color is required.")
-    .customSanitizer(value => value.toUpperCase()),
+    .withMessage("A valid vehicle color is required."),
   ]
 }
 
@@ -129,7 +126,7 @@ validate.addVehicleRules = () => {
  * Check data and return errors or continue to add classification
  * ***************************** */
 validate.checkVehicleData = async (req, res, next) => {
-  const { classification_name, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+  const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -139,8 +136,6 @@ validate.checkVehicleData = async (req, res, next) => {
       errors,
       title: "Add New Vehicle",
       nav,
-      classList,
-      classification_name,
       inv_make, 
       inv_model, 
       inv_description, 
@@ -150,8 +145,9 @@ validate.checkVehicleData = async (req, res, next) => {
       inv_year, 
       inv_miles, 
       inv_color, 
+      classList,
     })
-    return
+    return;
   }
   next()
 }

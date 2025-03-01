@@ -110,19 +110,28 @@ invController.buildAddNewVehicle = async function (req, res, next) {
 }
 
 /* ****************************************
-*  Process New Classification
+*  Process New Vehcile
 * *************************************** */
 invController.addNewVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
   let manageView = await utilities.buildManagementView()
   let classList = await utilities.buildClassificationList()
-  const { classification_name } = req.body
+  const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body
 
-  const newClassResult = await invModel.addNewClass(
-    classification_name,
+  const newVehicleResult = await invModel.addNewVehicle(
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color, 
+    classification_id,
   )
 
-  if (newClassResult) {
+  if (newVehicleResult) {
     req.flash(
       "notice",
       `New vehicle successfully added.`

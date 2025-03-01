@@ -349,6 +349,43 @@ picture img {
  font-size: 40px;
 }
 
+/* Manage View */
+.manage-view li {
+  list-style-type: none;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form {
+  background-color: rgb(32, 140, 173);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-family: 'Roboto', sans-serif;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-right: 20%;
+  margin-left: 20%;
+  padding: 2%;
+  border-radius: 5px;
+}
+
+.form fieldset {
+  justify-content: center;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.form label, .form input {
+  padding: 5px;
+}
+
+.new-vehicle-form, .new-class-form {
+  font-family: 'Roboto', sans-serif;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  border-radius: 5px;
+}
+
 /* Footer */
 footer {
   position: absolute;
@@ -507,6 +544,8 @@ footer {
     font-size: 15px;
     margin: 7%;
   }
+
+  /* Manage View */
 
   /* Footer */
   footer {
