@@ -12,11 +12,13 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
-const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/index")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
+const app = express()
 
 /* ***********************
  * View Engine and Templates
@@ -49,6 +51,12 @@ app.use(function(req, res, next){
 // Body Parser Middleware 
 app.use(bodyParser.json()) // tells application to use body parser to work with JSON data
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// Cookie Parser Middleware
+app.use(cookieParser())
+
+// Check jwt function
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Routes

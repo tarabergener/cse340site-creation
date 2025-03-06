@@ -35,12 +35,6 @@ const accountModel = require("../models/account-model")
       minSymbols: 1,
     })
     .withMessage("Password does not meet requirements.")
-    .custom(async (account_password) => {
-      const incorrectPassword = await accountModel.checkPasswordCorrect(account_password)
-      if (incorrectPassword){
-          throw new Error("Invalid email or password. Please try with different credentials.")
-      }
-    })
   ]
  }
 

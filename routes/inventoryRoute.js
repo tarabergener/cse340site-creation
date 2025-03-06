@@ -20,6 +20,9 @@ router.get("/add-classification", utilities.handleErrors(invController.buildAddN
 // Route to build Add New Vehicle view
 router.get("/add-vehicle", utilities.handleErrors(invController.buildAddNewVehicle));
 
+// Route to get inventory for AJAX Route
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 // Process the new classification data
 router.post(
     "/add-classification",
