@@ -21,7 +21,7 @@
   <p>ALL FIELDS ARE REQUIRED.</p>
   <form id="updateForm" class="edit-vehicle-form" action="/inv/update" method="post">
     <fieldset>
-      <label for="classification_name"><strong>Classification</strong></label><br>
+      <label for="classificationSelect"><strong>Classification</strong></label><br>
       <%- classificationSelect %><br>
       <label for="inv_make"><strong>Make</strong></label><br>
       <input type="text" id="inv_make" name="inv_make" required placeholder="Min of 3 characters" value="<%= locals.inv_make %>"><br>
