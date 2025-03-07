@@ -88,6 +88,7 @@ Util.buildManagementView = async function (req, res, next) {
     manageView += '<ul class="manage-view">';
     manageView += '<li><a href="../../inv/add-classification" title="Add New Classification">Add New Classification</a></li>';
     manageView += '<li><a href="../../inv/add-vehicle" title="Add New Vehicle">Add New Vehicle</a></li>'
+    manageView += '</ul>'
 
   return manageView
 }
