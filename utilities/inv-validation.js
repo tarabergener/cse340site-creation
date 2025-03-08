@@ -134,7 +134,7 @@ validate.checkVehicleData = async (req, res, next) => {
     let classList = await utilities.buildClassificationList()
     res.render("inventory/add-vehicle", {
       errors,
-      title: "Edit " + itemName,
+      title: "Add New Vehicle",
       nav,
       inv_make, 
       inv_model, 
@@ -162,9 +162,10 @@ validate.checkUpdateData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     let classList = await utilities.buildClassificationList()
+    let itemName = inv_make + inv_model
     res.render("inventory/edit-inventory", {
       errors,
-      title: "Add New Vehicle",
+      title: "Edit " + itemName,
       nav,
       inv_id,
       inv_make, 
