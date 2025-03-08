@@ -144,6 +144,7 @@ invController.addNewVehicle = async function (req, res, next) {
       title: "Vehicle Management",
       nav,
       manageView,
+      classificationSelect,
       errors: null,
     })
   } else {
@@ -151,7 +152,7 @@ invController.addNewVehicle = async function (req, res, next) {
     res.status(501).render("inventory/add-vehicle", {
       title: "Add New Vehicle",
       nav,
-      classificationSelect: classificationSelect,
+      classificationSelect,
       errors: null,
     })
   }
