@@ -41,7 +41,7 @@ invController.buildByInventoryId = async function (req, res, next) {
 invController.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav()
   let manageView = await utilities.buildManagementView()
-  const classificationSelect = await utilities.buildClassificationList()
+  let classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
@@ -70,6 +70,7 @@ invController.buildAddNewClassification = async function (req, res, next) {
 invController.addNewClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   let manageView = await utilities.buildManagementView()
+  const classificationSelect = await utilities.buildClassificationList()
   const { classification_name } = req.body
 
   const newClassResult = await invModel.addNewClass(
@@ -86,6 +87,7 @@ invController.addNewClass = async function (req, res, next) {
       nav,
       manageView,
       errors: null,
+      classificationSelect,
     })
   } else {
     req.flash("notice", `Sorry, add classification process failed. Try again.`)
@@ -102,11 +104,11 @@ invController.addNewClass = async function (req, res, next) {
  * ************************** */
 invController.buildAddNewVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
-  let classList = await utilities.buildClassificationList()
+  const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/add-vehicle", {
     title: "Add New Vehicle",
     nav,
-    classList,
+    classificationSelect,
     errors: null,
   })
 }
@@ -117,7 +119,7 @@ invController.buildAddNewVehicle = async function (req, res, next) {
 invController.addNewVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
   let manageView = await utilities.buildManagementView()
-  let classList = await utilities.buildClassificationList()
+  const classificationSelect = await utilities.buildClassificationList()
   const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body
 
   const newVehicleResult = await invModel.addNewVehicle(
@@ -149,7 +151,7 @@ invController.addNewVehicle = async function (req, res, next) {
     res.status(501).render("inventory/add-vehicle", {
       title: "Add New Vehicle",
       nav,
-      classList,
+      classificationSelect: classificationSelect,
       errors: null,
     })
   }

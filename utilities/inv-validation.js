@@ -131,7 +131,7 @@ validate.checkVehicleData = async (req, res, next) => {
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    let classList = await utilities.buildClassificationList()
+    let classificationSelect = await utilities.buildClassificationList()
     res.render("inventory/add-vehicle", {
       errors,
       title: "Add New Vehicle",
@@ -145,7 +145,7 @@ validate.checkVehicleData = async (req, res, next) => {
       inv_year, 
       inv_miles, 
       inv_color, 
-      classList,
+      classificationSelect:classificationSelect,
     })
     return;
   }
@@ -161,7 +161,7 @@ validate.checkUpdateData = async (req, res, next) => {
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    let classList = await utilities.buildClassificationList()
+    let classificationSelect = await utilities.buildClassificationList()
     let itemName = inv_make + inv_model
     res.render("inventory/edit-inventory", {
       errors,
@@ -177,7 +177,7 @@ validate.checkUpdateData = async (req, res, next) => {
       inv_year, 
       inv_miles, 
       inv_color, 
-      classList,
+      classificationSelect,
     })
     return;
   }
