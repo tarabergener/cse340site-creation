@@ -35,7 +35,6 @@
 </div>
 <div class="password-form">
     <p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character.</p>
-    <p>*note your original password will be changed.</p>
     <form id="updatePassword" class="update-password-form" action="/account/edit" method="post">
       <fieldset>
         <label for="account_password"><strong>Password</strong></label><br>
@@ -46,4 +45,7 @@
         <% } %>>
       </fieldset>
     </form>
+    <p>*note your original password will be changed.</p>
 </div>
+
+<script src="../../js/account-update.js"></script>

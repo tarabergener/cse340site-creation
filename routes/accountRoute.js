@@ -49,7 +49,6 @@ router.post(
 router.post(
   '/edit-password',
   validate.registrationRules(),
-
 )
 
 module.exports = router;
