@@ -16,6 +16,9 @@ router.get(
   utilities.checkLogin, 
   utilities.handleErrors(accountController.buildAccountManagement));
 
+// Route to build edit account view
+router.get('/edit-account', utilities.handleErrors(accountController.buildEditAccount));
+
 // Route for processing registration without validation, just posts ALL inputs
 //router.post('/register', utilities.handleErrors(accountController.registerAccount));
 
@@ -27,12 +30,26 @@ router.post(
     utilities.handleErrors(accountController.registerAccount)
 );
 
-// Process the login attempt
+// Process login attempt
 router.post(
     '/login',
     validate.loginRules(),
     validate.checkLoginData,
     utilities.handleErrors(accountController.loginAccount)
   );
+
+// Process account info update
+router.post(
+  '/edit',
+  validate.registrationRules(),
+  utilities.handleErrors(accountController.editAccount)
+)
+
+// Process account password update
+router.post(
+  '/edit-password',
+  validate.registrationRules(),
+
+)
 
 module.exports = router;

@@ -9,11 +9,9 @@ require("dotenv").config()
 * *************************************** */
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
-    //let logView = await utilities.buildLogin()
     res.render("account/login", {
         title: "Login",
         nav,
-        //logView,
         errors: null,
     })
 }
@@ -131,11 +129,86 @@ async function registerAccount(req, res) {
 * *************************************** */
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
+  let accountManage = await utilities.buildAccountManagementView()
   res.render("account/account-manage", {
-      title: "Your Account",
+      title: "Account Management",
       nav,
       errors: null,
+      accountManage,
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, loginAccount, buildAccountManagement };
+/* ****************************************
+*  Deliver edit inventory view
+* *************************************** */
+async function buildEditAccount(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  res.render("./account/edit-account", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_id: accountData.account_id,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+  })
+}
+
+/* ****************************************
+*  Process edit account
+* *************************************** */
+async function editAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email } = req.body
+  let accountManage = await utilities.buildAccountManagementView()
+
+  //try {
+  //  // regular password and cost (salt is generated automatically)
+  //  hashedPassword = await bcrypt.hashSync(account_password, 10)
+  //} catch (error) {
+  //  req.flash("notice", 'Sorry, there was an error processing the update.')
+  //  res.status(500).render("account/edit-account", {
+  //    title: "Edit Account",
+  //    nav,
+  //    errors: null,
+  //  })
+  //}
+
+  const editResult = await accountModel.editAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+  )
+
+  if (editResult) {
+    req.flash(
+      "notice",
+      `Congratulations, ${account_firstname}. Your account was successfully updated.`
+    )
+    res.status(201).render("account/account-manage", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      accountManage,
+    })
+  } else {
+    req.flash("notice", `Sorry, the update failed.`)
+    res.status(501).render("account/edit-account", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+}
+
+module.exports = { 
+  buildLogin, 
+  buildRegister, 
+  registerAccount, 
+  loginAccount, 
+  buildAccountManagement,
+  buildEditAccount,
+  editAccount,
+ };

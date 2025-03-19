@@ -26,6 +26,9 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Route to build Modify Inventory view
 router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory));
 
+// Route to build Delete Inventory view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInventory));
+
 // Process the new classification data
 router.post(
     "/add-classification",
@@ -49,5 +52,12 @@ router.post(
     validate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory)
 );
+
+// Process the deletion of inventory items 
+// This route should match the action tag in the delete vehicle view
+router.post(
+    "/delete",
+    utilities.handleErrors(invController.deleteInventory)
+)
 
 module.exports = router;

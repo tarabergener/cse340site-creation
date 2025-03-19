@@ -200,7 +200,7 @@ invController.buildEditInventory = async function (req, res, next) {
 }
 
 /* ****************************************
-*  Process New Vehcile
+*  Process Update Vehcile
 * *************************************** */
 invController.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
@@ -257,6 +257,42 @@ invController.updateInventory = async function (req, res, next) {
       inv_color,
       classification_id,
     })
+  }
+}
+
+/* ****************************************
+*  Deliver delete inventory view
+* *************************************** */
+invController.buildDeleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getSingleByInventoryId(inv_id)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-inventory", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+  })
+}
+
+/* ****************************************
+*  Process Delete Vehcile
+* *************************************** */
+invController.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id)
+  const deleteResult = await invModel.deleteInventory(inv_id)
+
+  if (deleteResult) {
+    req.flash("notice", `The vehicle was successfully deleted.`)
+    res.redirect("/inv/")
+  } else {
+    req.flash("notice", `Sorry, the vehicle was not deleted. Please try again.`)
+    res.redirect("delete/inv_id") 
   }
 }
 

@@ -81,11 +81,11 @@ Util.buildSingleView = async function(data){
 }
 
 /* **************************************
-* Build the Vehicle Management view
+* Build the Account Management view
 * ************************************ */
 Util.buildManagementView = async function (req, res, next) {
   let manageView = '';
-    manageView += '<ul class="manage-view">';
+    manageView += '<ul class="account-manage">';
     manageView += '<li><a href="../../inv/add-classification" title="Add New Classification">Add New Classification</a></li>';
     manageView += '<li><a href="../../inv/add-vehicle" title="Add New Vehicle">Add New Vehicle</a></li>'
     manageView += '</ul>'
@@ -138,7 +138,7 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
- /* ****************************************
+/* ****************************************
 * Check login
 **************************************** */
 Util.checkLogin = (req, res, next) => {
@@ -148,6 +148,18 @@ Util.checkLogin = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
+}
+
+/* **************************************
+* Build the Vehicle Management view
+* ************************************ */
+Util.buildAccountManagementView = async function (req, res, next) {
+  let accountManage = '';
+    accountManage += '<ul class="manage-view">';
+    accountManage += '<li><a href="../../account/edit-account" title="Edit Account Information">Edit Account Information</a></li>';
+    accountManage += '</ul>'
+
+  return accountManage
 }
 
 /* **************************************
