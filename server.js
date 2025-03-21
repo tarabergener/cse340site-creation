@@ -48,6 +48,13 @@ app.use(function(req, res, next){
   next()
 })
 
+// Login Save Name Middleware
+app.use((req, res, next) => {
+  res.locals.account_name = req.session.account_name || null;
+  res.locals.loggedin = req.session.loggedin || false;
+  next();
+})
+
 // Body Parser Middleware 
 app.use(bodyParser.json()) // tells application to use body parser to work with JSON data
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

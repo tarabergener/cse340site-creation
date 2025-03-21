@@ -17,7 +17,13 @@
  </ul>
 <% } %>
 
-<h2><strong>Welcome, <%= locals.account_firstname %></strong></h2>
+
+<h2><strong>Welcome, <%= account_name %></strong></h2>
 <p>You're logged in.</p>
 
 <%- accountManage %>
+
+<% if (locals.account_type === 'Employee' || 'Admin') { %>
+  <h3>Manage Inventory</h3>
+  <a title="Click to manage inventory" href="/inv/">Manage Inventory</a>
+<% } %>

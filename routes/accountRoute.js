@@ -43,12 +43,15 @@ router.post(
   '/edit',
   validate.registrationRules(),
   utilities.handleErrors(accountController.editAccount)
-)
+);
 
 // Process account password update
 router.post(
   '/edit-password',
   validate.registrationRules(),
-)
+);
+
+// Process logout attempt
+router.get('/logout', utilities.handleErrors(accountController.logoutAccount));
 
 module.exports = router;

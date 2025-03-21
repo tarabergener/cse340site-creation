@@ -1,5 +1,6 @@
 const { buildByClassificationId } = require("../controllers/invController")
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -146,6 +147,18 @@ Util.checkLogin = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+* Check account type
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.accountData.account_type === "Employee" || "Admin") {
+    next()
+  } else {
+    req.flash("notice", "Must be an employee to access this page.")
     return res.redirect("/account/login")
   }
 }

@@ -50,6 +50,10 @@ async function loginAccount(req, res) {
   try {
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       delete accountData.account_password
+       // save login
+       req.session.account_id = accountData.account_id; // id
+       req.session.account_name = accountData.account_firstname; // name
+       req.session.is_logged_in = true;
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
       if(process.env.NODE_ENV === 'development') {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
@@ -70,6 +74,18 @@ async function loginAccount(req, res) {
   } catch (error) {
     throw new Error('Access Forbidden')
   }
+}
+
+/* ****************************************
+ *  Process logout request
+ * ************************************ */
+async function logoutAccount(req, res) {
+  // Clear the JWT cookie
+  res.clearCookie("jwt");
+
+  // Provide a message or redirect to the home page
+  req. flash("notice", 'You have successfully logged out.')
+  return res.redirect("/")
 }
 
 /* ****************************************
@@ -130,6 +146,7 @@ async function registerAccount(req, res) {
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
   let accountManage = await utilities.buildAccountManagementView()
+  const { account_firstname } = req.body
   res.render("account/account-manage", {
       title: "Account Management",
       nav,
@@ -139,7 +156,7 @@ async function buildAccountManagement(req, res, next) {
 }
 
 /* ****************************************
-*  Deliver edit inventory view
+*  Deliver edit account view
 * *************************************** */
 async function buildEditAccount(req, res, next) {
   const account_id = parseInt(req.params.account_id)
@@ -208,6 +225,7 @@ module.exports = {
   buildRegister, 
   registerAccount, 
   loginAccount, 
+  logoutAccount,
   buildAccountManagement,
   buildEditAccount,
   editAccount,
