@@ -17,7 +17,7 @@ router.get(
   utilities.handleErrors(accountController.buildAccountManagement));
 
 // Route to build edit account view
-router.get('/edit-account', utilities.handleErrors(accountController.buildEditAccount));
+router.get('/edit-account/:account_id', utilities.handleErrors(accountController.buildEditAccount));
 
 // Route for processing registration without validation, just posts ALL inputs
 //router.post('/register', utilities.handleErrors(accountController.registerAccount));
@@ -49,6 +49,7 @@ router.post(
 router.post(
   '/edit-password',
   validate.registrationRules(),
+  utilities.handleErrors(accountController.editPassword)
 );
 
 // Process logout attempt

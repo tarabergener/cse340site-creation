@@ -12,22 +12,31 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByInventoryId));
 
 // Route to build Vehicle Management view to add classifications and inventory
-router.get("/", utilities.handleErrors(invController.buildManagementView));
+router.get(
+    "/", 
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildManagementView));
 
 // Route to build Add New Classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddNewClassification))
+router.get("/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildAddNewClassification))
 
 // Route to build Add New Vehicle view
-router.get("/add-vehicle", utilities.handleErrors(invController.buildAddNewVehicle));
+router.get("/add-vehicle", utilities.checkAccountType, utilities.handleErrors(invController.buildAddNewVehicle));
 
 // Route to get inventory for AJAX Route
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get(
+    "/getInventory/:classification_id", 
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to build Modify Inventory view
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory));
+router.get(
+    "/edit/:inv_id", 
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildEditInventory));
 
 // Route to build Delete Inventory view
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInventory));
+router.get("/delete/:inv_id", utilities.checkAccountType,utilities.handleErrors(invController.buildDeleteInventory));
 
 // Process the new classification data
 router.post(

@@ -145,13 +145,11 @@ async function registerAccount(req, res) {
 * *************************************** */
 async function buildAccountManagement(req, res, next) {
   let nav = await utilities.getNav()
-  let accountManage = await utilities.buildAccountManagementView()
   const { account_firstname } = req.body
   res.render("account/account-manage", {
       title: "Account Management",
       nav,
       errors: null,
-      accountManage,
   })
 }
 
@@ -162,6 +160,7 @@ async function buildEditAccount(req, res, next) {
   const account_id = parseInt(req.params.account_id)
   let nav = await utilities.getNav()
   const accountData = await accountModel.getAccountById(account_id)
+  console.log(accountData)
   res.render("./account/edit-account", {
     title: "Edit Account",
     nav,
@@ -179,7 +178,6 @@ async function buildEditAccount(req, res, next) {
 async function editAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email } = req.body
-  let accountManage = await utilities.buildAccountManagementView()
 
   //try {
   //  // regular password and cost (salt is generated automatically)
@@ -208,7 +206,6 @@ async function editAccount(req, res) {
       title: "Account Management",
       nav,
       errors: null,
-      accountManage,
     })
   } else {
     req.flash("notice", `Sorry, the update failed.`)

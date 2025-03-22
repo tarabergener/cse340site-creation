@@ -155,24 +155,12 @@ Util.checkLogin = (req, res, next) => {
 * Check account type
 **************************************** */
 Util.checkAccountType = (req, res, next) => {
-  if (res.locals.accountData.account_type === "Employee" || "Admin") {
+  if (res.locals.accountData.account_type == "Employee" || res.locals.accountData.account_type == "Admin") {
     next()
   } else {
     req.flash("notice", "Must be an employee to access this page.")
     return res.redirect("/account/login")
   }
-}
-
-/* **************************************
-* Build the Vehicle Management view
-* ************************************ */
-Util.buildAccountManagementView = async function (req, res, next) {
-  let accountManage = '';
-    accountManage += '<ul class="manage-view">';
-    accountManage += '<li><a href="../../account/edit-account" title="Edit Account Information">Edit Account Information</a></li>';
-    accountManage += '</ul>'
-
-  return accountManage
 }
 
 /* **************************************

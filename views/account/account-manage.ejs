@@ -21,9 +21,11 @@
 <h2><strong>Welcome, <%= account_name %></strong></h2>
 <p>You're logged in.</p>
 
-<%- accountManage %>
+<ul class="manage-view">
+  <li><a href="/account/edit-account/<%= locals.accountData.account_id %>" title="Edit Account Information">Edit Account Information</a></li>
+</ul>
 
-<% if (locals.account_type === 'Employee' || 'Admin') { %>
+<% if (locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin') { %>
   <h3>Manage Inventory</h3>
   <a title="Click to manage inventory" href="/inv/">Manage Inventory</a>
 <% } %>
