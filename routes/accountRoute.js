@@ -41,7 +41,8 @@ router.post(
 // Process account info update
 router.post(
   '/edit',
-  validate.registrationRules(),
+  validate.updateDataRules(),
+  validate.checkUpdateData,
   utilities.handleErrors(accountController.editAccount)
 );
 

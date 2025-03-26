@@ -59,16 +59,16 @@ async function getAccountById(account_id){
 /* *****************************
 *   Update account information
 * *************************** */
-async function editAccount(
+async function updateAccount(
+  account_id,
   account_firstname,
   account_lastname,
   account_email,
-  account_id,
 ) {
   try {
-    const sql = `UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *`
+    const sql = `UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *`
     console.log("SQL", sql);
-    console.log("Values:", account_firstname, account_lastname, account_email)
+    console.log("Values:", account_id, account_firstname, account_lastname, account_email)
     const data = await pool.query(sql, [
       account_firstname,
       account_lastname,
@@ -81,10 +81,25 @@ async function editAccount(
   }
 }
 
+/* *****************************
+*   Update password
+* *************************** */
+async function updatePassword(account_password){
+  try {
+    const sql = `UPDATE public.account SET account_password = $1 WHERE account_id = $ RETURNING *`
+    console.log("SQL", sql);
+    console.log("Values:", account_password)    
+    return await pool.query(sql, [account_password]);
+  } catch (error) {
+    console.log("Error:", error.message);
+    return error.message
+  }
+}
+
 module.exports = { 
   registerAccount, 
   checkExistingEmail, 
   getAccountByEmail,
   getAccountById, 
-  editAccount,
+  updateAccount,
 }

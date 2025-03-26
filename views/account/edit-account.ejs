@@ -27,7 +27,7 @@
         <label for="account_email"><strong>Email</strong></label><br>
         <input id="account_email" name="account_email" required value="<%= locals.account_email %>"><br>
         <input type="submit" name="submit" value="Update Account" disabled>
-        <input type="hidden" name="account_id"
+        <input type="hidden" name="account_id" 
         <% if(locals.account_id) { %> value="<%= locals.account_id %>"
         <% } %>>
       </fieldset>
