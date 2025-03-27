@@ -84,12 +84,12 @@ async function updateAccount(
 /* *****************************
 *   Update password
 * *************************** */
-async function updatePassword(account_password){
+async function updatePassword(account_id, account_password){
   try {
-    const sql = `UPDATE public.account SET account_password = $1 WHERE account_id = $ RETURNING *`
+    const sql = `UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *`
     console.log("SQL", sql);
-    console.log("Values:", account_password)    
-    return await pool.query(sql, [account_password]);
+    console.log("Values:", account_id, account_password)    
+    return await pool.query(sql, [account_password, account_id]);
   } catch (error) {
     console.log("Error:", error.message);
     return error.message
@@ -102,4 +102,5 @@ module.exports = {
   getAccountByEmail,
   getAccountById, 
   updateAccount,
+  updatePassword,
 }

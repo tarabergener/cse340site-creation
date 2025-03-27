@@ -219,11 +219,8 @@ async function editAccount(req, res) {
 async function editPassword(req, res) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email, account_password, account_id } = req.body
-  const editResult = await accountModel.updateAccount(
-    account_id, 
-    account_firstname,
-    account_lastname,
-    account_email,
+  const editResult = await accountModel.updatePassword(
+    account_id,
     account_password,
   )
 

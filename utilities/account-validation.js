@@ -120,7 +120,6 @@ validate.checkRegData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      //let regView = await utilities.buildRegister()
       res.render("account/register", {
         errors,
         title: "Registration",
@@ -128,7 +127,6 @@ validate.checkRegData = async (req, res, next) => {
         account_firstname,
         account_lastname,
         account_email,
-        //regView,
       })
       return
     }
@@ -188,6 +186,26 @@ validate.checkUpdateData = async (req, res, next) => {
     return;
   }
   next()
+}
+
+/*  **********************************
+  *  Update Password Validation Rules
+  * ********************************* */
+validate.updatePasswordRules = () => {
+  return [
+      // password is required and must be strong password
+      body("account_password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements."),
+  ]
 }
   
 module.exports = validate

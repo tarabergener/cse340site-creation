@@ -49,7 +49,8 @@ router.post(
 // Process account password update
 router.post(
   '/edit-password',
-  validate.registrationRules(),
+  validate.updatePasswordRules(),
+  validate.checkUpdateData,
   utilities.handleErrors(accountController.editPassword)
 );
 
