@@ -56,7 +56,6 @@ invController.buildManagementView = async function (req, res, next) {
  * ************************** */
 invController.buildAddNewClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
-  //let newClassView = await utilities.newClassView()
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,

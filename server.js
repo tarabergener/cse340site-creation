@@ -12,12 +12,12 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const reviewsRoute = require("./routes/reviewsRoute")
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/index")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
-
 const app = express()
 
 /* ***********************
@@ -75,6 +75,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 // Account Route
 app.use("/account", accountRoute)
+// Reviews Route
+app.use("/reviews", reviewsRoute)
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})

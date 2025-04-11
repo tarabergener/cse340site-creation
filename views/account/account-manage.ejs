@@ -33,3 +33,16 @@
   <h3>Manage Inventory</h3>
   <a title="Click to manage inventory" href="/inv/">Manage Inventory</a>
 <% } %>
+
+<h2>My Reviews</h2>
+<%# if (reviews) { 
+  reviews.forEach(review => { %>
+    <!-- <p>Reviewed the <%#= locals.inv_year %> <%#= locals.inv_make %> <%#= locals.inv_model %> on <%#= locals.review_date %></p>
+    <hr />
+    <a title="Click to edit review" href="/reviews/update-review">Edit</a>
+    <a title="Click to delete review" href="/reviews/delete-review">Delete</a>-->
+  <%# });%>
+  
+<%# } else { %>
+  <p><mark>Leave a <a title="Click to select a vehicle to review" href="/">review</a> today!</mark></p>
+<%# } %>
